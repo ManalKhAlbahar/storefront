@@ -1,22 +1,41 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
-export default function BasicStack() {
+export default function Footer() {
   return (
-    <div>
-      <Stack spacing={2}>
+    <>
+     
+      <ButtonAppBar />
+    </>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+function ButtonAppBar() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root} id='footer'>
+      <AppBar id='nav-bar' position='static'>
+        <Toolbar>
+          <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'></IconButton>
+          <h2>&Copy; Manal Kh Albahar</h2>
         
-        <Item>&Copy; Manal Kh Albahar</Item>
-      </Stack>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }

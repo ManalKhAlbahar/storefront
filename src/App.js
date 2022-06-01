@@ -1,21 +1,23 @@
-import React from 'react'
-import Categories from './components/Categories';
+import  React from 'react';
+import './App.css';
 import Header from './components/Header';
-import Products from './components/Products';
-import ActiveCategories from './components/activeCategories';
 import Footer from './components/Footer';
+import Category from './components/Categories';
+import Products from './components/Products';
+import SimpleCart from './components/SimpleCart ';
+
 
 function App() {
   return (
     <>
       <Header />
-      <Categories />
-      <ActiveCategories />
+      <SimpleCart />
+      <Category />
       <Products />
       <Footer />
-
     </>
-  )
+
+  );
 }
 
-export default App
+export default App;

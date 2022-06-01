@@ -1,28 +1,37 @@
-import React from "react";
-import { Breadcrumbs, Link } from "@mui/material";
+import React from 'react';
+import { connect } from 'react-redux';
+import { selectCategory } from '../reducer/actions';
+import { Button } from '@material-ui/core';
 
-import { connect } from "react-redux";
-import { selectCate, reset } from "../store/categories";
+function Category(props) {
+  function onClickHandler(categoryName) {
+    props.selectCategory(categoryName);
+  }
+  console.log(props.categories)
+  return (
+    <>
+      <h2 id='Category'>Select Category:</h2>
+      {
+      props.categories.map((cat) => {
+        console.log(cat)
+        let name = cat.normalizedName;
+       return <>
+          <Button id='Button'  variant="contained"color="primary" onClick={() => onClickHandler(name)}>
+            {name}
+          </Button>
+        </>
+        })
+      }
 
-const Categories = (props) => {
-    console.log('props-->', props);return (
-        <section>
-            <Breadcrumbs>
-                {props.categories.map(item => {
-                    return (
-                        <Link color="inherit" onClick={() => props.selectCate(item.normalizedName)}>
-                            {item.normalizedName}
-                        </Link>
-                    )
-                })}
-            </Breadcrumbs>
-        </section>
-    );
+      {props.activeCategory.normalizedName && <h2>Active Category : {props.activeCategory.normalizedName}</h2>}
+    
+      {props.activeCategory.normalizedName && <h4 id='desc'> {props.activeCategory.description}</h4>}
+    </>
+  );
+}
+const mapStateToProps = (state) => {
+  console.log('STAT--->', state);
+  return state.cat;
 };
-const mapStateToProps = (state) => ({
-    categories: state.ReduceCategory.categories,
-});
-
-const mapDispatchToProps = { selectCate, reset };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+const mapDispatchToProps = { selectCategory };
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

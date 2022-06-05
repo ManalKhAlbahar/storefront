@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
             <Typography variant='h4' className={classes.title}>
                 STORE
             </Typography>
-            <h3>Cart ({props.state.cart.cartProducts.length})</h3>
+
           </Toolbar>
         </AppBar>
       </div>

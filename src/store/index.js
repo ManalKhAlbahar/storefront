@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 import thunk from 'redux-thunk';
 
 import category from '../reducer/category-reducer';
@@ -12,3 +13,4 @@ const store = () => {
 }
 
 export default store();
+

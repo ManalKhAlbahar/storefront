@@ -11,6 +11,7 @@ import { Grid } from '@material-ui/core';
 import * as actions from '../reducer/actions'
 
 import { connect } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const Products = props => {
@@ -30,6 +31,7 @@ const Products = props => {
     e && e.preventDefault();
     props.get();
   }
+
 
   useEffect(() => {
     fetchData();

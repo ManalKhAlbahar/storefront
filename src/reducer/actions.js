@@ -63,6 +63,7 @@ export const putRemoteData = (id, data) => async dispatch => {
     };
   }
 
+
 export const getAction = data => {
   return {
     type: 'GET',
@@ -104,3 +105,4 @@ export const electronics = (data) => {
     payload: data
   }
 }
+

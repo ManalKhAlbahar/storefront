@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
             <Typography variant='h4' className={classes.title}>
                 STORE
             </Typography>
-           
+
           </Toolbar>
         </AppBar>
       </div>

@@ -1,37 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectCategory } from '../reducer/actions';
+import * as actions  from '../reducer/actions';
 import { Button } from '@material-ui/core';
 
-function Category(props) {
-  function onClickHandler(categoryName) {
-    props.selectCategory(categoryName);
-  }
-  console.log(props.categories)
-  return (
-    <>
-      <h2 id='Category'>Select Category:</h2>
-      {
-      props.categories.map((cat) => {
-        console.log(cat)
-        let name = cat.normalizedName;
-       return <>
-          <Button id='Button'  variant="contained"color="primary" onClick={() => onClickHandler(name)}>
-            {name}
-          </Button>
-        </>
-        })
-      }
+const Categories = props => {
+  return(
+  
+    <section className="breadcrumbs">
+      <p className='Select' >Select Category:</p>
+      <>
+      <Button id="Button1" size="large"  variant="contained"color="primary" onClick={() => props.get()}>ALL</Button>    
+      <Button id="Button2" size="large"  variant="contained"color="primary" onClick={() => props.food()}>FOOD</Button>
+      <Button id="Button3" size="large"  variant="contained"color="primary" onClick={() => props.electronics()}>ELECTRONICS</Button>
+      </>
+   
+      </section>
+  )
+}  
 
-      {props.activeCategory.normalizedName && <h2>Active Category : {props.activeCategory.normalizedName}</h2>}
-    
-      {props.activeCategory.normalizedName && <h4 id='desc'> {props.activeCategory.description}</h4>}
-    </>
-  );
-}
-const mapStateToProps = (state) => {
-  console.log('STAT--->', state);
-  return state.cat;
-};
-const mapDispatchToProps = { selectCategory };
-export default connect(mapStateToProps, mapDispatchToProps)(Category);
+const mapStateToProps = state => ({
+  state
+})
+
+const mapDispatchToProps = (dispatch, getState) => ({
+  get: () => dispatch(actions.getRemoteData()),
+  food: () => dispatch(actions.getFood()),
+  electronics: () => dispatch(actions.getElectronics())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

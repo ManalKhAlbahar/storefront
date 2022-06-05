@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { filterProducts } from '../reducer/actions';
-import MediaCard from './cards';
+
+import MediaCard from './card';
 
 function Products(props) {
   useEffect(() => {

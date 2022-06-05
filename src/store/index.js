@@ -1,14 +1,6 @@
-import {combineReducers, createStore} from 'redux';
-import ReduceCategory from './categories';
-import ReduceProducts from './products';
-
-
-let reducers = combineReducers({ReduceCategory,ReduceProducts});
-
-const store = () => {
-  
-    return createStore(reducers)
-}
-
-
-export default store();
+import { createStore, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { catProdReducer } from '../reducer/category-reducer';
+import { productReducer } from '../reducer/product-reducer';
+const reducers = combineReducers({ cat: catProdReducer, prod: productReducer});
+export const store = createStore(reducers, composeWithDevTools());

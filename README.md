@@ -10,3 +10,6 @@ An application that will power an online storefront that will allow our users to
 - UML :
 
 ![UML36](UML36.jpg)
+- [PR redux](https://github.com/ManalKhAlbahar/storefront/pull/3)
+- [PR combined-reducers](https://github.com/ManalKhAlbahar/storefront/pull/2)
+

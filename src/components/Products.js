@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -6,12 +7,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Spinner } from 'react-spinners-css';
+import { If, Then, Else } from 'react-if';
 import { Grid } from '@material-ui/core';
-
 import * as actions from '../reducer/actions'
 
 import { connect } from 'react-redux';
-
 import { makeStyles } from '@material-ui/core/styles';
 
 const Products = props => {
@@ -32,53 +33,75 @@ const Products = props => {
     props.get();
   }
 
-
   useEffect(() => {
     fetchData();
   }, []);
 
   return(
-    <section className="products">
-      <Grid container>
-        {props.products.map(product => {
-          if(product.inventory > 0){
-            return (
-            <Card className={classes.root} key={product._id} id="card">
-               <CardActionArea>
-                 <CardMedia
-                  className={classes.media}
-                  image={product.image}
-                  title={product.name}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {product.name}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    {product.description}
-                  </Typography>
-                  <Typography gutterBottom variant='h6' component='h6'>
+    <If condition={props.products.length === 0}>
+      <Then>
+        <div className="spinner">
+          <Spinner color="#3f51b5" />
+        </div>
+      </Then>
+      <Else>
+        <If condition={props.products.length > 0}>
+          <Then>
+            <section className="products">
+              <Grid container spacing={6}>
+                {props.products.map(product => {
+                  if(product.inventory > 0){
+                    return (
+                      <Grid item xs={12} md={4}>
+                    <Card className={classes.root} key={product.id} id="card">
+                      <CardActionArea>
+                        <CardMedia
+                          className={classes.media}
+                          image={product.image}
+                          title={product.name}
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {product.name}
+                          </Typography>
+                          <Typography variant="body2" color="textSecondary" component="p">
+                            {product.description}
+                          </Typography>
+                          <Typography gutterBottom variant='h6' component='h6'>
             Price : {product.price}
           </Typography>
           <Typography gutterBottom variant='h6' component='h6'>
           in stock : {product.inventory} pieces
           </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" variant="contained" color="primary" onClick={() => props.addToCart(product.id, product)}>
-                  ADD TO CART
-                </Button>
-                <Button size="small" variant="contained" color="primary">
-                  VIEW DETAILS
-                </Button>
-              </CardActions>
-            </Card>
-            )
-          }
-        })}
-      </Grid>
-    </section>
+                        </CardContent>
+                      </CardActionArea>
+                      <CardActions>
+                        <Grid container>
+                          <Grid item sm={6}>
+                            <Button size="small" variant="contained" color="primary" onClick={() => props.addToCart(product.id, product)}>
+                              ADD TO CART
+                            </Button>
+                          </Grid>
+                          <Grid item sm={6}>
+                            <Link to={`products/${product.id}`}>
+                              <Button size="small" variant="contained" color="primary">
+                                VIEW DETAILS
+                              </Button>
+                            </Link>
+                          </Grid>
+                        </Grid>
+                      </CardActions>
+                    </Card>
+                    </ Grid>
+                    )
+                  }
+                })}
+              </Grid>
+            </section>
+          </Then>
+        </If>
+      </Else>
+    </If>
   )
 }
 
